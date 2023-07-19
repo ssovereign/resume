@@ -1,0 +1,284 @@
+%-------------------------
+% Rezume, a latex resume template for developers
+% Author : Nanu Panchamurthy
+% Based off of: https://github.com/sb2nov/resume
+% License : MIT
+
+% Hope this resume template helps you land an awesome job. If you found this helpful, please consider starring the github repo here, .
+%-------------------------
+
+
+
+%------------PACKAGES----------------
+\documentclass[a4paper,11pt]{article}
+
+\usepackage{verbatim} % reimplements the "verbatim" and "verbatim*" environments
+
+\usepackage{titlesec} % provides an interface to sectioning commands i.e. custom elements
+
+\usepackage{color} % provides both foreground and background color management
+
+\usepackage{enumitem} % provides control over enumerate, itemize and description
+
+\usepackage{fancyhdr} % provides extensive facilities for constructing headers, footers and also controlling their use
+
+\usepackage{tabularx} % defines an environment tabularx, extension of "tabular" with an extra designator x, paragraph like column whose width automatically expands to fill the width of the environment
+
+\usepackage{latexsym} % provides mathematical symbols
+
+\usepackage{marvosym} % provides martin vogel's symbol font which contains various symbols
+
+\usepackage[empty]{fullpage} % sets margins to one inch and removes headers, footers etc..
+
+\usepackage[hidelinks]{hyperref} % removes color and shadow of hyperlinks
+
+\usepackage[normalem]{ulem} % provides "\ul" (uline) command which will break at line breaks
+
+\usepackage[english]{babel} % provides culturally determined typographical rules for wide range of languages
+
+\definecolor{mygreen}{RGB}{85, 158, 87}
+\definecolor{myblurp}{RGB}{85, 57, 204}
+
+%-----------------------------------------
+
+\input glyphtounicode % converts glyph names to unicode
+\pdfgentounicode=1 % ensures pdfs generated are ats readable
+
+%----------FONT OPTIONS-------------------
+\usepackage[default]{lmodern} % uses the font source sans pro
+\urlstyle{same} % changes url font from default urlfont to font being used by the document
+%-----------------------------------------
+
+
+%----------MARGIN OPTIONS-----------------
+\pagestyle{fancy} % set page style to one configured by fancyhdr
+\fancyhf{} % clear all header and footer fields
+
+\renewcommand{\headrulewidth}{0in} % sets thickness of linerule under header to zero
+\renewcommand{\footrulewidth}{0in} % sets thickness of linerule over footer to zero
+
+\setlength{\tabcolsep}{0in} % sets thickness of column separator in tables to zero
+
+% origin of the document is one inch from the top and from and the left
+% oddsidemargin and evensidemargin both refer to the left margin
+% right margin is indirectly set using oddsidemargin
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\topmargin}{-0.5in}
+
+\addtolength{\textwidth}{1.0in} % sets width of text area in the page to one inch
+\addtolength{\textheight}{1.0in} % sets height of text area in the page to one inch
+
+\raggedbottom{} % makes all pages the height of current page, no extra vertical space added
+\raggedright{} % makes all pages the width of current page, no extra horizontal space added
+%------------------------------------------
+
+
+%--------SECTIONING COMMANDS---------
+% \titleformat{<command>}
+%   [<shape>]{<format>}{<label>}{<sep>}
+%     {<before-code>}[<after-code>]
+
+% command is the sectioning command to be redefined
+% shape is the style of the font; scshape stands for small caps style
+% format is the format to be applied to whole title- label and text; absent here
+% label defines the label
+% sep is the horizontal separation between label and title body
+% before-code is the code to be executed before
+% after-code is the code to be executed after
+
+
+\titleformat{\section}
+  {\large}{}
+    {0em}{\color{myblurp}}[\color{black}\titlerule\vspace{0pt}]
+%-------------------------------------
+
+
+%--------REDEFINITIONS----------------
+% redefines the style of the bullet point
+\renewcommand\labelitemii{$\vcenter{\hbox{\tiny$\bullet$}}$}
+
+% redefines the underline depth to 2pt
+\renewcommand{\ULdepth}{2pt}
+%-------------------------------------
+
+
+%--------CUSTOM COMMANDS--------------
+%\vspace{} defines a vertical space of given size, modifying this in custom commands can help stretch or shrink resume to remove or add content
+
+% resumeItem renders a bullet point
+\newcommand{\resumeItem}[1]{
+  \item\small{#1}
+}
+
+% commands to start and end itemization of resumeItem, rightmargin set to 0.11in to avoid the overflow of resumetItem beyond whatever resumeItemHeading is being used
+\newcommand{\resumeItemListStart}{\begin{itemize}[rightmargin=0.11in]}
+\newcommand{\resumeItemListEnd}{\end{itemize}}
+
+% resumeSectionType renders a bolded type to be used under a section, used as skill type here, middle element is used to keep ":"s in the same vertical line
+\newcommand{\resumeSectionType}[3]{
+  \item\begin{tabular*}{0.96\textwidth}[t]{
+    p{0.15\linewidth}p{0.02\linewidth}p{0.81\linewidth}
+  }
+    \textbf{#1} & #2 & #3
+  \end{tabular*}\vspace{-2pt}
+}
+
+% resumeTrioHeading renders three elements in three columns with second element being italicized and first element bolded, can be used for projects with three elements
+\newcommand{\resumeTrioHeading}[3]{
+  \item\small{
+    \begin{tabular*}{0.96\textwidth}[t]{
+      l@{\extracolsep{\fill}}c@{\extracolsep{\fill}}r
+    }
+      \textbf{#1} & \textit{#2} & #3
+    \end{tabular*}
+  }
+}
+
+% resumeQuadHeading renders four elements in a two columns with the second row being italicized and first element of first row bolded, can be used for experience and projects with four elements
+\newcommand{\resumeQuadHeading}[4]{
+  \item
+  \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1} & #2 \\
+    \textit{\small#3} & \textit{\small #4} \\
+  \end{tabular*}
+}
+
+% resumeQuadHeadingChild renders the second row of resumeQuadHeading, can be used for experience if different roles in the same company need to added
+\newcommand{\resumeQuadHeadingChild}[2]{
+  \item
+  \begin{tabular*}{0.96\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{\small#1} & {\small#2} \\
+  \end{tabular*}
+}
+
+% commands to start and end itemization of resumeQuadHeading, lefmargin for left indent of 0.15in for resumeItems
+\newcommand{\resumeHeadingListStart}{
+  \begin{itemize}[leftmargin=0.15in, label={}]
+}
+\newcommand{\resumeHeadingListEnd}{\end{itemize}}
+%-------------------------------------------
+
+
+%__________________RESUME____________________
+% You can rearrange sections in any order you may prefer
+\begin{document}
+
+%-----------CONTACT DETAILS------------------
+% Make sure all the details are correct, you can add more links in the first row of second column if needed
+
+\begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
+  \textbf{\Huge aryan agrawal \vspace{2pt}} & % row = 1, col = 1
+  los angeles, california \\ % row = 1, col = 2
+  %\href{https://ssovereign.tech}{\uline{ssovereign.tech}} $|$ % row = 2, col = 1
+  %\href{https://www.linkedin.com/in/aryan-agrawal-61102925b/}{\uline{linkedin}} $|$ % row = 2, col = 1
+  \href{https://github.com/ssovereign}{\textcolor{mygreen}{{\uline{github}}}} & % row = 2, col = 1
+  %\href{https://leetcode.com/ssovereign}{\uline{leetcode}} & % row = 2, col = 1
+    \href{mailto:aryanagr@usc.edu}{\textcolor{mygreen}{{\uline{aryanagr@usc.edu}}}} $|$ % row = 2, col = 2
+  6692820275 \\ % row = 2, col = 2
+\end{tabular*}
+%--------------------------------------------
+
+
+%-----------SUMMARY--------------------------
+% Keep this short, simple and straigth to point
+\vspace{\baselineskip}
+\small{
+  passionate computer science and physics student dedicated to pushing the boundaries of knowledge and technology. 
+}
+%--------------------------------------------
+%-----------EDUCATION-------------------------
+% Mention your CGPA, if its good, in the first row of second column
+
+\section{education.}
+  \resumeHeadingListStart{}
+    \resumeQuadHeading{viterbi school of engineering, university of southern california}{los angeles, california} 
+    {bachelor of science: computer science, minor: physics.}{aug 2022 -- present}
+    {courses taken: calculus 3, introduction to programming, discrete methods, \textbf{data structures}, \textbf{mechanics (physics)}.}
+
+    \resumeQuadHeading{the international school bangalore}{bangalore, india}
+    {international baccalaureate.}{aug 2020 - jun 2022}
+  \resumeHeadingListEnd{}
+    
+
+%---------------------------------------------
+
+
+%-----------EXPERIENCE-----------------------
+% Distill all your talking points to small bullet points which follow the pattern "challenge-action-result" for maximum efficiency. Try to quantify (use numbers) your points whenver possible, highlist words of importance
+
+\section{experience.}
+\resumeHeadingListStart{}
+  \resumeQuadHeading{software engineering intern}{jun 2023 -- aug 2023}
+      {troupestail}{remote (vancouver, canada)}
+    \resumeItemListStart{}
+      \resumeItem{developed an attribute library and player library, integrated them with the battle system, with the following tools: \textbf{unity, c\# (jetbrains rider).}}
+      \resumeItem{utilized an agile workflow, presenting progress weekly and transitioning seamlessly through project specs.}
+      \resumeItem{collaborated with a team of developers and designers (w/ PM), and contributed to a large codebase.}
+    \resumeItemListEnd{}
+
+  \resumeQuadHeading{researcher}{jun 2021 -- oct 2021}
+  {polygence}{remote (bangalore, india)}
+    \resumeItemListStart{}
+        \resumeItem{developed 3d chess conceptual game map with rulesets.}
+      \resumeItem{implemented popular algorithms (min-max, NN) using numpy/scipy + matplotlib (Python).}
+      \resumeItem{mentored under dr. gaurab banerjee, and utilized jupyter notebooks for writeups.}
+    \resumeItemListEnd{}
+
+  \resumeQuadHeadingChild{robotics team lead}{aug 2018 -- jun 2020}
+  {greenwood high international school}
+    \resumeItemListStart{}
+      \resumeItem{co-lead software and hardware development units for competitive robots.}
+      \resumeItem{best rescue engineering strategy team award + top 10, robotics cup junior, sydney international 2019. multiyear regional and national champions, robotics cup junior (india).}
+      \resumeItem{mentored 3 successful teams in various robotics cup junior categories.}
+    \resumeItemListEnd{}
+\resumeHeadingListEnd{}
+%---------------------------------------------
+
+%--------------SKILLS------------------------
+% Add or remove resumeSectionTypes according to your needs
+
+\section{technical skills.}
+  \resumeHeadingListStart{}
+    \resumeSectionType{languages}{:}{c++, c\#, python, java, javascript, matlab, french, hindi.}
+    \resumeSectionType{tools}{:}{jetbrains ides, altium/kicad, unity, fl studio, musescore, siemens nx, musescore, kali linux, git.}
+    \resumeSectionType{hobbies}{:}{piano, music production, chess, reading, topology.}
+    \resumeSectionType{interests}{:}{video game programming, artificial intelligence, quantum information, avionics, 3d analysis.}
+    \resumeSectionType{organizations}{:}{USC Rocket Propulsion Lab (6 months).}
+  \resumeHeadingListEnd{}
+%--------------------------------------------
+
+
+
+
+
+%-----------PROJECTS--------------------------
+% Use resumeQuadHeading if four elements are feasible (ex: demo video link), else use resumeTrioHeading. Keep the bullet points simple and concise and try to cover wide variety of skills you have used to build these projects
+
+\section{projects.}
+  \resumeHeadingListStart{}
+    \resumeTrioHeading{nespy - python (pygame + numpy).}{}{}
+      \resumeItemListStart{}
+        \resumeItem{collaborated with two other developers to design the only NES emulator in python.}
+        \resumeItem{helped to implement core components: CPU, ROM, BUS.}
+      \resumeItemListEnd{}
+
+    \resumeTrioHeading{evolutio96.}{}{}
+      \resumeItemListStart{}
+        \resumeItem{custom keyboard (96 layout) with per key rgb, rgb underglow, and hotswap.}
+        \resumeItem{designed pcb from scratch using kicad and designed acrylic case using fusion360.}
+      \resumeItemListEnd{}
+  \resumeHeadingListEnd{}
+%--------------------------------------------
+
+
+%----------------OTHERS----------------------
+% You can add your acheivements, accolades, certifications etc. here.
+
+\section{certifications.}
+  \resumeItemListStart{}
+    \resumeItem{{{stanford university - machine learning (andrew ng, coursera)}}}
+    \resumeItem{{{brown university pre-college program - introduction to computational mathematics and big data visualization}}}
+  \resumeItemListEnd{}
+%--------------------------------------------
+
+\end{document}
